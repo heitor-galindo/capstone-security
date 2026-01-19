@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_DIR: EurekaServer
-    image: ghcr.io/heitor-galindo/eureka-server:latest
+    image: ghcr.io/heitor-galindo/eureka-server:1.0.0
     ports:
       - "8761:8761"
     restart: on-failure
@@ -36,7 +36,7 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_DIR: StudentMS
-    image: ghcr.io/heitor-galindo/student-ms:latest
+    image: ghcr.io/heitor-galindo/student-ms:1.0.0
     container_name: campstone-security-student-ms
     environment:
       EUREKA_HOST: http://eureka-server:8761/eureka/
@@ -54,7 +54,7 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_DIR: ReservationMS
-    image: ghcr.io/heitor-galindo/reservation-ms:latest
+    image: ghcr.io/heitor-galindo/reservation-ms:1.0.0
     container_name: campstone-security-reservations-ms
     environment:
       EUREKA_HOST: http://eureka-server:8761/eureka/
@@ -66,6 +66,30 @@ services:
     restart: on-failure
     depends_on:
       - student-ms
+
+  kafka:
+    image: apache/kafka:latest
+    hostname: broker
+    container_name: broker
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_NODE_ID: 1
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:29093
+      KAFKA_LISTENERS: PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+
 
 volumes:
   keycloak_data:
@@ -88,29 +112,4 @@ volumes:
 #      - "8089:8089"
 #    restart: on-failure
 
-
-#
-#  broker:
-#    image: apache/kafka:latest
-#    hostname: broker
-#    container_name: broker
-#    ports:
-#      - "9092:9092"
-#    environment:
-#      KAFKA_BROKER_ID: 1
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
-#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-#      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-#      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-#      KAFKA_PROCESS_ROLES: broker,controller
-#      KAFKA_NODE_ID: 1
-#      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:29093
-#      KAFKA_LISTENERS: PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092
-#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-#      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-#      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
-#      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
-#
 
