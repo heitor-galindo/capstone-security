@@ -5,17 +5,17 @@ import com.skistation.reservationms.dto.StudentDTO;
 import com.skistation.reservationms.entities.Reservation;
 import com.skistation.reservationms.repository.ReservationRepository;
 import java.time.LocalDate;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ReservationService implements IReservationService {
 
-    @Autowired
-    private KafkaTemplate<String, ReservationEvent> kafkaTemplate;
-    private static final String TOPIC = "reservation-event";
+  @Autowired private KafkaTemplate<String, ReservationEvent> kafkaTemplate;
+  private static final String TOPIC = "reservation-event";
 
   private final ReservationRepository reservationRepository;
 
@@ -25,7 +25,6 @@ public class ReservationService implements IReservationService {
 
   @Override
   public Reservation addReservation(StudentDTO student) {
-
 
     Reservation res = new Reservation();
     if (student == null) {
@@ -39,8 +38,11 @@ public class ReservationService implements IReservationService {
 
     Reservation reservation = reservationRepository.save(res);
 
-    ReservationEvent event = new ReservationEvent(reservation.getIdReservation(), reservation.getStudentId());
-      kafkaTemplate.send(TOPIC, event);
+    ReservationEvent event =
+        new ReservationEvent(reservation.getIdReservation(), reservation.getStudentId());
+    log.info("Sending reservation event: {}", event);
+    kafkaTemplate.send(TOPIC, event);
+    log.info("Reservation event sent to topic {}", TOPIC);
 
     return reservation;
   }

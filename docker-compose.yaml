@@ -42,7 +42,7 @@ services:
       EUREKA_HOST: http://eureka-server:8761/eureka/
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/MsSecurity
       KEYCLOAK_TOKEN_URI: http://keycloak:8080/realms/MsSecurity/protocol/openid-connect/token
-      KAFKA_HOST: http://kafka:9092
+      KAFKA_HOST: kafka:29092
     ports:
       - "8084:8084"
     restart: on-failure
@@ -62,7 +62,7 @@ services:
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/MsSecurity
       KEYCLOAK_TOKEN_URI: http://keycloak:8080/realms/MsSecurity/protocol/openid-connect/token
       MS_RESERVATION_CLIENT_SECRET: 123asd
-      KAFKA_HOST: http://kafka:9092
+      KAFKA_HOST: kafka:29092
     ports:
       - "8086:8086"
     restart: on-failure

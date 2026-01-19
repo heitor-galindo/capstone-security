@@ -33,6 +33,7 @@ public class ReservationController {
         "Reservation added for student {} with NIC {}",
         student.getNomStudent(),
         student.getStudentSchool());
+    log.info("Student details: {}", student);
     return reservationService.addReservation(student);
   }
 }
