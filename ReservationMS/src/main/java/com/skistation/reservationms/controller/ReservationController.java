@@ -32,7 +32,7 @@ public class ReservationController {
     log.info(
         "Reservation added for student {} with NIC {}",
         student.getNomStudent(),
-        student.getNicStudent());
+        student.getStudentSchool());
     return reservationService.addReservation(student);
   }
 }
