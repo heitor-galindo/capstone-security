@@ -8,7 +8,7 @@ services:
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: password
-      KC_HOSTNAME: localhost
+      KC_HOSTNAME: keycloak
       KC_HOSTNAME_STRICT: false
     ports:
       - "8080:8080"
@@ -41,7 +41,7 @@ services:
     environment:
       EUREKA_HOST: http://eureka-server:8761/eureka/
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/MsSecurity
-      MS_RESERVATION_CLIENT_SECRET: hAcBMeBcZe8ntxr0bshhgTImLzYHgEpL
+      KEYCLOAK_TOKEN_URI: http://keycloak:8080/realms/MsSecurity/protocol/openid-connect/token
     ports:
       - "8084:8084"
     restart: on-failure
@@ -59,6 +59,8 @@ services:
     environment:
       EUREKA_HOST: http://eureka-server:8761/eureka/
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/MsSecurity
+      KEYCLOAK_TOKEN_URI: http://keycloak:8080/realms/MsSecurity/protocol/openid-connect/token
+      MS_RESERVATION_CLIENT_SECRET: 123asd
     ports:
       - "8086:8086"
     restart: on-failure
