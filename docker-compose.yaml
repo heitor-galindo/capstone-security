@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_DIR: EurekaServer
-    image: ghcr.io/heitor-galindo/eureka-server:latest
+    image: ghcr.io/ineilesreyes/eureka-server:latest
     ports:
       - "8761:8761"
     restart: on-failure
@@ -36,7 +36,7 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_DIR: StudentMS
-    image: ghcr.io/heitor-galindo/student-ms:latest
+    image: ghcr.io/ineilesreyes/student-ms:latest
     container_name: campstone-security-student-ms
     environment:
       EUREKA_HOST: http://eureka-server:8761/eureka/
@@ -54,7 +54,7 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_DIR: ReservationMS
-    image: ghcr.io/heitor-galindo/reservation-ms:latest
+    image: ghcr.io/ineilesreyes/reservation-ms:latest
     container_name: campstone-security-reservations-ms
     environment:
       EUREKA_HOST: http://eureka-server:8761/eureka/
