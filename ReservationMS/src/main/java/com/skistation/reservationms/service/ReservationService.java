@@ -1,13 +1,21 @@
 package com.skistation.reservationms.service;
 
+import com.skistation.reservationms.configuration.ReservationEvent;
 import com.skistation.reservationms.dto.StudentDTO;
 import com.skistation.reservationms.entities.Reservation;
 import com.skistation.reservationms.repository.ReservationRepository;
 import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationService implements IReservationService {
+
+    @Autowired
+    private KafkaTemplate<String, ReservationEvent> kafkaTemplate;
+    private static final String TOPIC = "reservation-event";
 
   private final ReservationRepository reservationRepository;
 
@@ -17,6 +25,8 @@ public class ReservationService implements IReservationService {
 
   @Override
   public Reservation addReservation(StudentDTO student) {
+
+
     Reservation res = new Reservation();
     if (student == null) {
       throw new IllegalArgumentException("Student does not exist.");
@@ -27,6 +37,11 @@ public class ReservationService implements IReservationService {
     res.setEndDate(LocalDate.now().plusYears(1));
     res.setEstValide(true);
 
-    return reservationRepository.save(res);
+    Reservation reservation = reservationRepository.save(res);
+
+    ReservationEvent event = new ReservationEvent(reservation.getIdReservation(), reservation.getStudentId());
+      kafkaTemplate.send(TOPIC, event);
+
+    return reservation;
   }
 }
