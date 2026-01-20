@@ -1,31 +1,38 @@
 package com.skistation.reservationms.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
+/** The type Reservation. */
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @ToString
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Reservation {
 
-  @Id
+  /**
+   * The Id reservation.
+   */
+@Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  long idReservation;
+  Long idReservation;
 
-  @Temporal(TemporalType.DATE)
-  LocalDate startDate;
+  /**
+   * The Student id.
+   */
+@NonNull
+  @Column(nullable = false)
+  Long studentId;
 
-  @Temporal(TemporalType.DATE)
-  LocalDate endDate;
-
-  boolean estValide;
-
-  Long roomId; // reference to remote Room
-  Long studentId; // reference to remote Student
+  /**
+   * The Creation date.
+   */
+@CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  LocalDateTime creationDate;
 }

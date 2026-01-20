@@ -1,15 +1,16 @@
 package com.skistation.studentms.config;
 
+import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import lombok.*;
 
-import java.io.Serializable;
-
+/** The type Reservation event. */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReservationEvent implements Serializable {
-    private Long reservationId;
-    private Long studentId;
+  @NotNull private Long reservationId;
+  @NotNull private Long studentId;
 }

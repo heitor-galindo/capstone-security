@@ -1,21 +1,22 @@
-//package com.skistation.gateway.securityConfig;
+// package com.skistation.gateway.securityConfig;
 //
-//import java.util.*;
-//import java.util.stream.Collectors;
-//import java.util.stream.Stream;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.core.convert.converter.Converter;
-//import org.springframework.lang.NonNull;
-//import org.springframework.security.authentication.AbstractAuthenticationToken;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.oauth2.jwt.Jwt;
-//import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-//import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-//import org.springframework.stereotype.Component;
+// import java.util.*;
+// import java.util.stream.Collectors;
+// import java.util.stream.Stream;
+// import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.core.convert.converter.Converter;
+// import org.springframework.lang.NonNull;
+// import org.springframework.security.authentication.AbstractAuthenticationToken;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.oauth2.jwt.Jwt;
+// import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+// import
+// org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+// import org.springframework.stereotype.Component;
 //
-//@Component
-//public class JwtConverter implements Converter<Jwt, AbstractAuthenticationToken> {
+// @Component
+// public class JwtConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 //  private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
 //      new JwtGrantedAuthoritiesConverter();
 //
@@ -65,7 +66,8 @@
 //    if (roles == null) return Set.of();
 //    // Convert Keycloak roles like "role_user" -> Spring Security ROLE_USER
 //    return roles.stream()
-//        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.replace("role_", "").toUpperCase()))
+//        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.replace("role_",
+// "").toUpperCase()))
 //        .collect(Collectors.toSet());
 //  }
-//}
+// }

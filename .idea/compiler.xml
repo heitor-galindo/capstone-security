@@ -10,15 +10,16 @@
         <module name="EurekaServer" />
         <module name="gateway" />
       </profile>
-      <profile name="Annotation profile for ReservationMS" enabled="true">
+      <profile name="Annotation profile for StudentMS" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="/home/heitor/.m2/repository/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+          <entry name="/home/heitor/.m2/repository/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
-        <module name="ReservationMS" />
         <module name="StudentMS" />
+        <module name="ReservationMS" />
       </profile>
     </annotationProcessing>
   </component>

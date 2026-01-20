@@ -12,7 +12,7 @@ public class StudentMsApplication {
    *
    * @param args the args
    */
-  static void main(String[] args) {
+  public static void main(String[] args) {
     SpringApplication.run(StudentMsApplication.class, args);
   }
 }

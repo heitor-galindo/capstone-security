@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * The type Security config.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -17,7 +20,14 @@ public class SecurityConfig {
 
   @Autowired private JwtConverter jwtConverter;
 
-  @Bean
+  /**
+   * Security filter chain security filter chain.
+   *
+   * @param http the http
+   * @return  the security filter chain
+   * @throws Exception the exception
+   */
+@Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())

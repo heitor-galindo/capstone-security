@@ -13,28 +13,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@RequiredArgsConstructor
 public class Student {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String firstName;
-  private String school;
-  private int age;
-  private long inc;
+  @NonNull private String firstName;
+  @NonNull private String school;
+  @NonNull private Integer age;
 
-  /**
-   * Instantiates a new Student.
-   *
-   * @param firstName the first name
-   * @param school the school
-   * @param age the age
-   */
-  public Student(String firstName, String school, int age) {
-    this.firstName = firstName;
-    this.school = school;
-    this.age = age;
-  }
-
+  private Long reservationId;
 }

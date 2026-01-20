@@ -8,20 +8,24 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 
+/**
+ * The type Security config.
+ */
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
-  @Bean
+  /**
+   * Spring security filter chain security web filter chain.
+   *
+   * @param http the http
+   * @return  the security web filter chain
+   */
+@Bean
   public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
     return http.csrf(ServerHttpSecurity.CsrfSpec::disable)
         .authorizeExchange(
-            auth ->
-                auth
-                    .pathMatchers("/actuator/**")
-                    .permitAll()
-                    .anyExchange()
-                    .authenticated())
+            auth -> auth.pathMatchers("/actuator/**").permitAll().anyExchange().authenticated())
         .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
         .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
         .build();

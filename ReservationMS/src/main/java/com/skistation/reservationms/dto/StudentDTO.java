@@ -2,17 +2,16 @@ package com.skistation.reservationms.dto;
 
 import lombok.*;
 
-import java.util.Date;
-
+/** The type Student dto. */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class StudentDTO {
-    Long idStudent;
-    String nomStudent;
-    String prenomStudent;
-    String studentSchool;
-    Date dateOfBirth;
+  private Long id;
+  private String firstName;
+  private String school;
+  private Integer age;
+  private Long reservationId;
 }

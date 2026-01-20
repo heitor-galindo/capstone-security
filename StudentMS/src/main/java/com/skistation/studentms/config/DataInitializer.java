@@ -17,9 +17,9 @@ public class DataInitializer {
    * Init student data command line runner.
    *
    * @param studentRepository the student repository
-   * @return the command line runner
+   * @return  the command line runner
    */
-  @Bean
+@Bean
   CommandLineRunner initStudentData(StudentRepository studentRepository) {
     return args -> {
       List<Student> students =

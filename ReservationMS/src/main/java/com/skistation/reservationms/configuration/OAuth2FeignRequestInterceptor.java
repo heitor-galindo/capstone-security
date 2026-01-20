@@ -7,13 +7,21 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type O auth 2 feign request interceptor.
+ */
 @Component
 @Slf4j
 public class OAuth2FeignRequestInterceptor implements RequestInterceptor {
 
   private final OAuth2AuthorizedClientManager manager;
 
-  public OAuth2FeignRequestInterceptor(OAuth2AuthorizedClientManager manager) {
+  /**
+   * Instantiates a new O auth 2 feign request interceptor.
+   *
+   * @param manager the manager
+   */
+public OAuth2FeignRequestInterceptor(OAuth2AuthorizedClientManager manager) {
     this.manager = manager;
   }
 
@@ -26,10 +34,6 @@ public class OAuth2FeignRequestInterceptor implements RequestInterceptor {
                 .build());
     if (client != null && client.getAccessToken() != null) {
       String tokenValue = client.getAccessToken().getTokenValue();
-
-      log.info(
-          "Envoi du token OAuth2 au service student : {}", tokenValue.substring(0, 10) + "...");
-
       template.header("Authorization", "Bearer " + tokenValue);
     }
   }

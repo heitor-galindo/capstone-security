@@ -1,15 +1,15 @@
 package com.skistation.reservationms.configuration;
 
+import java.io.Serializable;
 import lombok.*;
 
-import java.io.Serializable;
-
+/** The type Reservation event. */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReservationEvent implements Serializable {
-    private Long reservationId;
-    private Long studentId;
+  private Long reservationId;
+  private Long studentId;
 }
