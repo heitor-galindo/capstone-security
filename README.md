@@ -1,4 +1,6 @@
-# campstone-kafka-docker
+# Capstone Project - Microservices Architecture
+
+## KAFKA
 
 Create topic
 
@@ -22,4 +24,35 @@ docker exec -it -w /opt/kafka/bin kafka \
     --from-beginning
 ```
 
+## TEST
 
+Get token
+
+```bash
+curl --location 'http://localhost:8080/realms/MsSecurity/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=client_credentials' \
+--data-urlencode 'client_id=ms-reservation' \
+--data-urlencode 'client_secret=123asd'
+```
+
+Create reservation
+
+```bash
+curl --location --request POST 'http://localhost:8086/reservations?studentId=1' \
+--header 'Authorization: Bearer xxxxxxxxxxx'
+```
+
+Get reservations
+
+```bash
+curl --location 'http://localhost:8086/reservations' \
+--header 'Authorization: Bearer xxxxxxxxxxxx'
+```
+
+Get students
+
+```bash
+curl --location 'http://localhost:8084/students/all' \
+--header 'Authorization: Bearer xxxxxxxxxxxx'
+```
