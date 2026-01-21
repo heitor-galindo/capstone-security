@@ -50,9 +50,9 @@ curl --location 'http://localhost:8086/reservations' \
 --header 'Authorization: Bearer xxxxxxxxxxxx'
 ```
 
-Get students
+Get accounts
 
 ```bash
-curl --location 'http://localhost:8084/students/all' \
+curl --location 'http://localhost:8084/accounts/all' \
 --header 'Authorization: Bearer xxxxxxxxxxxx'
 ```

@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/ReservationMS/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/EurekaServer/pom.xml" />
+        <option value="$PROJECT_DIR$/AccountMS/pom.xml" />
       </list>
     </option>
   </component>

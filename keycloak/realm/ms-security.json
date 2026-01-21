@@ -13,7 +13,7 @@
       }
     ],
     "client": {
-      "ms-student": [
+      "user-client": [
         {
           "name": "student.read",
           "clientRole": true,
