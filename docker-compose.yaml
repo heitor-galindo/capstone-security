@@ -1,6 +1,9 @@
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak:26.5.1
+    build:
+      context: keycloak
+      dockerfile: Dockerfile
+    image: ghcr.io/heitor-galindo/keycloak:3.0.0
     command:
       - start-dev
       - --import-realm
@@ -16,7 +19,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./keycloak/realm:/opt/keycloak/data/import
       - keycloak_data:/opt/keycloak/data
     restart: always
 
